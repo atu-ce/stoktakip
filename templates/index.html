@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="/static/jquery/jquery.min.js"></script>
+    <style>
+        .bluetext {
+            color: blue;
+        }
+
+        .purpletext {
+            color: purple;
+        }
+
+        .orangetext {
+            color: orange;
+        }
+
+        .redtext {
+            color: red;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-auto-rows: minmax(auto, auto);
+            grid-gap: 0px;
+        }
+    </style>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col grid">
+                <button type="button" class="btn btn-outline-dark btn-sm">
+                    <a href="">
+                        Ana Sayfa
+                    </a>
+                </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="collapse"
+                    data-target="#stokId,#infoStok" aria-expanded="false" aria-controls="stokId" id="apireq1">
+                    Stoklar
+                </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="collapse"
+                    data-target="#supplierId,#infoSupplier" aria-expanded="false" aria-controls="supplierId"
+                    id="apireq2">
+                    Tedarikçiler
+                </button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="collapse"
+                    data-target="#updateStokId,#infoUpdateStokId" aria-expanded="false" aria-controls="updateStokId"
+                    id="updateStok">
+                    Stok Bilgilerini Güncelle
+                </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="collapse" data-target="#newStok"
+                    aria-expanded="false" aria-controls="newStok">
+                    Yeni Stok
+                </button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="collapse"
+                    data-target="#newSupplier" aria-expanded="false" aria-controls="newSupplier">
+                    Yeni Tedarikçi
+                </button>
+            </div>
+            <!-- <div class="col-4">
+                <h4 class="redtext">
+                    <center>Stok Takip Sayfası</center>
+                </h4>
+            </div> -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col collapse" id="infoStok"></div>
+            <div class="col collapse" id="infoSupplier"></div>
+        </div>
+        <div class="row">
+            <div class="col collapse" id="stokId"></div>
+            <div class="col collapse" id="supplierId"></div>
+        </div>
+        <div class="row">
+            <div class="col collapse" id="infoUpdateStokId"></div>
+        </div>
+        <div class="row">
+            <div class="col collapse" id="updateStokId"></div>
+        </div>
+    </div>
+
+    <div class="collapse" id="newStok">
+        <div class="card card-body" id="formNewStok">
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h4> Eklenecek yeni stok bilgilerini giriniz.</h4>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="totalAmount">Total amount</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <input type="text" name="total_amount" class="form-control" id="totalAmount" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-check col col-sm-2">
+                            <label class="form-check-label" for="isActive">Is active</label>
+                        </div>
+                        <div class="form-check col col-sm-10">
+                            <input type="checkbox" name="is_active" class="col-sm-2form-check-input" id="isActive"
+                                value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col"></div>
+                    </div><!-- İki satır arasında ufak bir boşluk olması için eklendi. -->
+
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="stockName">Stock name</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <input type="text" name="stock_name" class="form-control" id="stockName" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="unitPrice">Unit price</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <input type="text" name="unit_price" class="form-control" id="unitPrice" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="currency">Currency</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <select id="currency" class="form-control">
+                                <option value selected>--------</option>
+                                <option value="1">1. Currency</option>
+                                <option value="2">2. Currency</option>
+                                <option value="3">3. Currency</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="basicUnit">Basic unit</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <select id="basicUnit" class="form-control">
+                                <option value selected>--------</option>
+                                <option value="1">1. Basic unit</option>
+                                <option value="2">2. Basic unit</option>
+                                <option value="3">3. Basic unit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="supplier">Supplier</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <select id="supplier" class="form-control">
+                                <option value selected>--------</option>
+                                <option value="1">1. Supplier</option>
+                                <option value="2">2. Supplier</option>
+                                <option value="3">3. Supplier</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col col-sm-10">
+                        </div>
+                        <div class="form-group col col-sm-2">
+                            <button type="submit" class="btn btn-primary js-tooltip">POST</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="collapse" id="newSupplier">
+        <div class="card card-body" id="formNewSupplier">
+            <form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h4> Eklenecek yeni tedarikçi bilgilerini giriniz.</h4>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <input type="text" name="name" class="form-control" id="name" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="phone">Phone</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <input type="text" name="phone" class="form-control" id="phone" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <input type="text" name="email" class="form-control" id="email" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col col-sm-2">
+                            <label for="address">Address</label>
+                        </div>
+                        <div class="form-group col col-sm-10">
+                            <textarea name="address" class="form-control" id="address" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col col-sm-10">
+                        </div>
+                        <div class="form-group col col-sm-2">
+                            <button type="submit" class="btn btn-primary js-tooltip">POST</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="updateText"></div>
+
+    <script src="/static/app.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
